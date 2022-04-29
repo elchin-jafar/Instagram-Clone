@@ -1,7 +1,38 @@
+import { useEffect, useState } from "react";
 import img from "../../assets/context.png";
+import InstagramPost from "../../components/InstagramPost";
 import styles from "./FeedPage.module.css";
 
 export default function FeedPage() {
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    fetch(
+      `https://api.unsplash.com/photos?page=${page}&per_page=5&client_id=ZRYIbgpUWEVo4o_1apdz5wxs4ujLhd18wIy8N1kXMa8`
+    )
+      .then((res) => res.json())
+      .then((res) => setData((oldData) => [...oldData, ...res]));
+  }, [page]);
+
+  useEffect(() => {
+    function onScroll() {
+      const { scrollTop, scrollHeight, clientHeight } =
+        document.documentElement;
+      if (scrollTop + clientHeight > scrollHeight - 5) {
+        setPage((page) => page + 1);
+      }
+    }
+
+    window.addEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+
+  
+
   return (
     <>
       <header>
@@ -51,7 +82,7 @@ export default function FeedPage() {
           <div className={styles.rightTopIcons}>
             <svg
               aria-label="Home"
-              class="_8-yf5 "
+              className="_8-yf5 "
               color="#262626"
               fill="#262626"
               height="24"
@@ -63,7 +94,7 @@ export default function FeedPage() {
             </svg>
             <svg
               aria-label="Messenger"
-              class="_8-yf5 "
+              className="_8-yf5 "
               color="#262626"
               fill="#262626"
               height="24"
@@ -75,17 +106,17 @@ export default function FeedPage() {
                 d="M12.003 2.001a9.705 9.705 0 110 19.4 10.876 10.876 0 01-2.895-.384.798.798 0 00-.533.04l-1.984.876a.801.801 0 01-1.123-.708l-.054-1.78a.806.806 0 00-.27-.569 9.49 9.49 0 01-3.14-7.175 9.65 9.65 0 0110-9.7z"
                 fill="none"
                 stroke="currentColor"
-                stroke-miterlimit="10"
-                stroke-width="1.739"
+                strokeMiterlimit="10"
+                strokeWidth="1.739"
               ></path>
               <path
                 d="M17.79 10.132a.659.659 0 00-.962-.873l-2.556 2.05a.63.63 0 01-.758.002L11.06 9.47a1.576 1.576 0 00-2.277.42l-2.567 3.98a.659.659 0 00.961.875l2.556-2.049a.63.63 0 01.759-.002l2.452 1.84a1.576 1.576 0 002.278-.42z"
-                fill-rule="evenodd"
+                fillRule="evenodd"
               ></path>
             </svg>
             <svg
               aria-label="New Post"
-              class="_8-yf5 "
+              className="_8-yf5 "
               color="#262626"
               fill="#262626"
               height="24"
@@ -97,16 +128,16 @@ export default function FeedPage() {
                 d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552z"
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
               ></path>
               <line
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 x1="6.545"
                 x2="17.455"
                 y1="12.001"
@@ -115,9 +146,9 @@ export default function FeedPage() {
               <line
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 x1="12.003"
                 x2="12.003"
                 y1="6.545"
@@ -126,7 +157,7 @@ export default function FeedPage() {
             </svg>
             <svg
               aria-label="Find People"
-              class="_8-yf5 "
+              className="_8-yf5 "
               color="#262626"
               fill="#262626"
               height="24"
@@ -138,12 +169,12 @@ export default function FeedPage() {
                 fill="none"
                 points="13.941 13.953 7.581 16.424 10.06 10.056 16.42 7.585 13.941 13.953"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
               ></polygon>
               <polygon
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 points="10.06 10.056 13.949 13.945 7.581 16.424 10.06 10.056"
               ></polygon>
               <circle
@@ -152,14 +183,14 @@ export default function FeedPage() {
                 fill="none"
                 r="10.5"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
               ></circle>
             </svg>
             <svg
               aria-label="Activity Feed"
-              class="_8-yf5 "
+              className="_8-yf5 "
               color="#262626"
               fill="#262626"
               height="24"
@@ -172,67 +203,12 @@ export default function FeedPage() {
           </div>
         </nav>
       </header>
-      <div className={styles.main}>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-          temporibus dolor tenetur mollitia a iste aliquam totam molestias,
-          placeat voluptatum sed, cupiditate cumque blanditiis unde pariatur.
-          Quam voluptatum, aspernatur quisquam error exercitationem, ex quas
-          necessitatibus quidem praesentium nobis obcaecati distinctio, dolorem
-          nemo deserunt labore voluptas earum culpa sapiente corporis. Sequi
-          dolores omnis dolorum itaque, voluptate suscipit nihil, quo molestiae
-          quibusdam, nisi tempora rerum nam cum natus amet architecto. Enim eum
-          eligendi sunt repellendus ducimus voluptatum reiciendis temporibus
-          rerum amet. Id, dolorem eaque vero ut, fugit vitae similique
-          perferendis consectetur recusandae quam neque veritatis commodi
-          repellendus sed expedita eveniet tenetur earum. Repudiandae mollitia
-          atque consectetur vel quae repellendus molestias, quia culpa odio id
-          doloremque earum, corporis, excepturi quas. Consequatur saepe dolorem
-          veritatis et obcaecati explicabo cupiditate. Molestias amet, nostrum
-          earum modi aliquam possimus provident totam quaerat quam beatae. Id
-          tenetur, consequuntur vel debitis libero velit maiores saepe expedita
-          architecto, ab, atque incidunt sapiente magnam! Itaque dolorum, fuga
-          dicta vel maxime aspernatur numquam! Sapiente ullam autem nam, illum
-          amet incidunt et fugit id libero quam dolor iure sint vitae
-          consequatur odio dolores! Sequi porro aperiam fugit, incidunt
-          quibusdam voluptatibus nihil cupiditate nemo odit totam reprehenderit
-          ea nam voluptatum magni eaque esse! Voluptate perferendis quisquam
-          quam expedita ipsam? Veritatis illo quasi quibusdam nobis deleniti,
-          exercitationem consectetur error, natus, suscipit omnis molestiae
-          numquam temporibus fugit magni? Soluta tenetur ad pariatur
-          consequuntur molestias atque expedita corrupti quaerat error debitis
-          odio, possimus culpa praesentium maiores neque repellat aliquam. Ea
-          maiores, tempora, quae dicta facere, repellendus quasi velit
-          perferendis eveniet sunt repudiandae aliquam nam vel! At vitae amet
-          porro, numquam cupiditate illum laborum possimus repellendus, ad nihil
-          placeat ex tenetur modi eum? Provident qui iste deleniti reprehenderit
-          dolores sapiente optio esse illo, expedita nam, totam neque, fugiat
-          unde ab dicta sed inventore aspernatur quaerat soluta consectetur aut
-          laudantium! Expedita repellat, eligendi consequuntur illo facilis
-          doloribus velit obcaecati corrupti deleniti modi totam officia aut vel
-          error possimus atque ipsam distinctio illum suscipit harum impedit
-          quod? Delectus eveniet facere fuga aperiam porro nostrum modi placeat
-          numquam sequi doloribus cum, aliquid alias accusantium natus similique
-          sapiente tenetur perferendis animi ut repellendus earum illum non
-          tempora. Porro sapiente, nulla quibusdam blanditiis sit nisi
-          laudantium quaerat adipisci numquam inventore impedit, deleniti non
-          sunt eos, placeat nobis. Dolorum temporibus nisi perspiciatis odit
-          repellendus porro blanditiis quam modi, nam sint explicabo esse
-          debitis? Quos modi voluptatem saepe incidunt amet harum officia magni
-          distinctio nesciunt asperiores explicabo qui mollitia, dolore numquam
-          et repudiandae natus voluptate obcaecati voluptates doloremque
-          facilis? Alias, saepe natus itaque corrupti quidem ut quo, sint,
-          repellendus eligendi eos reprehenderit architecto commodi! Nostrum,
-          voluptate ipsa omnis porro laborum est architecto? Amet nam dolore
-          cumque ipsa sint exercitationem illum, officia deleniti sapiente
-          tempora necessitatibus dolores suscipit accusantium explicabo, magnam
-          animi nobis unde fugiat sit eveniet. Ea ullam, dignissimos, quam ipsum
-          nihil, eveniet deserunt ipsam rem totam aliquid dicta quas? Deserunt
-          iure ab exercitationem corrupti, minus aut aliquid ratione consectetur
-          inventore totam consequatur maxime aspernatur, nemo pariatur,
-          voluptatibus hic rerum illum error nisi obcaecati sequi?
-        </p>
-      </div>
+      <main className={styles.main}>
+        {data.map((user) => (
+          <img key={user.id} src={user.urls.small} />
+        ))}
+      </main>
+      <button style={{ marginLeft: "50%" }} onClick={handleLoadMore}>load more</button>
     </>
   );
 }

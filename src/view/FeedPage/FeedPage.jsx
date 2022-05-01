@@ -3,6 +3,8 @@ import InstagramPost from "../../components/InstagramPost/InstagramPost";
 import MainHeader from "../../components/MainHeader/MainHeader";
 import styles from "./FeedPage.module.css";
 
+import _ from "lodash";
+
 export default function FeedPage() {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
@@ -15,26 +17,22 @@ export default function FeedPage() {
       .then((res) => setData((oldData) => [...oldData, ...res]));
   }, [page]);
 
-  // useEffect(() => {
+  useEffect(() => {
+    function handleScroll() {
+      const { clientHeight, scrollTop, scrollHeight } =
+        document.documentElement;
+      if (scrollTop + clientHeight >= scrollHeight - 5) {
+        setPage((page) => page + 1);
+      }
+    }
 
-  //   function handleScroll() {
-  //     const {clientHeight, scrollTop, scrollHeight} = document.documentElement
-  //     if(scrollTop + clientHeight >= scrollHeight - 50) {
-  //       setPage(page => page + 1)
-  //     }
-  //   }
-
-  //   window.addEventListener("scroll", handleScroll, {passive: true});
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll)
-  //   }
-  // }, [])
-
-  function handleLoadMore() {
-    setPage((page) => page + 1);
-  }
-
-  data.map((user) => console.log(user));
+    window.addEventListener("scroll", _.debounce(handleScroll, 300), {
+      passive: true,
+    });
+    return () => {
+      window.removeEventListener("scroll", _.debounce(handleScroll, 300));
+    };
+  }, []);
 
   return (
     <>
@@ -52,10 +50,6 @@ export default function FeedPage() {
             />
           ))}
         </main>
-
-        <button style={{ marginLeft: "50%" }} onClick={handleLoadMore}>
-          load more
-        </button>
       </div>
     </>
   );

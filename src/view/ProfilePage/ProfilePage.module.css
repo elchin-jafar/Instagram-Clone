@@ -1,0 +1,13 @@
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    justify-items: center;
+    align-items: center;
+}
+
+.gridPhotoWrapper{
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+

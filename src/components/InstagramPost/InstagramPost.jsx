@@ -1,30 +1,60 @@
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "./InstagramPost.module.css";
+
 export default function InstagramPost({
   profileImage,
   username,
   location,
   image,
   likes,
+  setUserData,
 }) {
+  const navigate = useNavigate();
+  async function handleClick() {
+    const response = await fetch(
+      `https://api.unsplash.com/users/${username}/photos/?per_page=12&client_id=ZRYIbgpUWEVo4o_1apdz5wxs4ujLhd18wIy8N1kXMa8`
+    );
+    const parsed = await response.json();
+    setUserData(parsed);
+    navigate("/profile");
+  }
   return (
-    <div style={{border:"1px solid black", margin:"20px 0"}}>
+    <div
+      style={{
+        border: "1px solid rgb(219,219,219)",
+        margin: "20px 0",
+        backgroundColor: "#fff",
+      }}
+    >
       <div className="bg-gray-100 p-4">
         <div className="bg-white border rounded-sm max-w-md">
-          <div className="flex items-center px-4 py-3">
+          <div className={`${styles.postHeader} flex items-center px-4 py-3`}>
             <img
-              className="h-8 w-8 rounded-full"
+              onClick={handleClick}
+              className={`${styles.profileImage} h-8 w-8 rounded-full`}
               src={profileImage}
             />
-            <div className="ml-3 ">
-              <span className="text-sm font-semibold antialiased block leading-tight">
-                {username}
+            <div className={`${styles.userInfo} ml-3`}>
+              <span
+                className={`${styles.username}text-sm font-semibold antialiased block leading-tight`}
+              >
+                <Link to="/profile" className={styles.userLink}>
+                  {" "}
+                  {username.toLowerCase()}{" "}
+                </Link>
               </span>
-              <span className="text-gray-600 text-xs block">
+              <span
+                className={`${styles.location} text-gray-600 text-xs block`}
+              >
                 {location}
               </span>
             </div>
           </div>
-          <img src={image} />
-          <div className="flex items-center justify-between mx-4 mt-3 mb-2">
+          <img src={image} className={styles.mainImage} />
+          <div
+            className={`${styles.iconWrapper} flex items-center justify-between mx-4 mt-3 mb-2`}
+          >
             <div className="flex gap-5">
               <svg fill="#262626" height="24" viewBox="0 0 48 48" width="24">
                 <path d="M34.6 6.1c5.7 0 10.4 5.2 10.4 11.5 0 6.8-5.9 11-11.5 16S25 41.3 24 41.9c-1.1-.7-4.7-4-9.5-8.3-5.7-5-11.5-9.2-11.5-16C3 11.3 7.7 6.1 13.4 6.1c4.2 0 6.5 2 8.1 4.3 1.9 2.6 2.2 3.9 2.5 3.9.3 0 .6-1.3 2.5-3.9 1.6-2.3 3.9-4.3 8.1-4.3m0-3c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5.6 0 1.1-.2 1.6-.5 1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path>
@@ -46,8 +76,10 @@ export default function InstagramPost({
               </svg>
             </div>
           </div>
-          <div className="font-semibold text-sm mx-4 mt-2 mb-4">
-            {likes}
+          <div
+            className={`${styles.likes} font-semibold text-sm mx-4 mt-2 mb-4`}
+          >
+            {likes != 0 && `${likes} likes`}
           </div>
         </div>
       </div>

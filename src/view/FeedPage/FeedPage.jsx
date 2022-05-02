@@ -5,9 +5,10 @@ import styles from "./FeedPage.module.css";
 
 import _ from "lodash";
 
-export default function FeedPage() {
+export default function FeedPage({setUserData}) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
+  // console.log(data);
 
   useEffect(() => {
     fetch(
@@ -21,7 +22,7 @@ export default function FeedPage() {
     function handleScroll() {
       const { clientHeight, scrollTop, scrollHeight } =
         document.documentElement;
-      if (scrollTop + clientHeight >= scrollHeight - 5) {
+      if (scrollTop + clientHeight >= scrollHeight - 50) {
         setPage((page) => page + 1);
       }
     }
@@ -43,10 +44,15 @@ export default function FeedPage() {
             <InstagramPost
               key={user.id}
               profileImage={user.user.profile_image.small}
-              username={user.user.first_name}
+              // bigPhoto={user.user.profile_image.regular}
+              username={user.user.username}
+              // name={user.user.name}
+              // totalphotos={user.user.total_photos}
+              // bio={user.user.bio}
               location={user.user.location}
-              image={user.urls.small}
+              image={user.urls.regular}
               likes={user.likes}
+              setUserData={setUserData}
             />
           ))}
         </main>

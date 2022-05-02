@@ -33,8 +33,14 @@
     color: rgb(142, 142, 142);
   }
   
+  .rightTopIcons {
+    display: flex;
+  }
+
   .rightTopIcons svg {
     margin-left: 30px;
     cursor: pointer;
   }
-  
+
+
+ 

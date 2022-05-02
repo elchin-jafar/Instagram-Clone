@@ -11,3 +11,14 @@
     overflow: hidden;
 }
 
+.onOneLine {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.profilePhoto {
+    position: relative;
+    left: 7rem;
+    transform: scale(1.3);
+}

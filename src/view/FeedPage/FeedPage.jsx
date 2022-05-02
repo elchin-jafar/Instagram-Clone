@@ -8,7 +8,6 @@ import _ from "lodash";
 export default function FeedPage({setUserData}) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  // console.log(data);
 
   useEffect(() => {
     fetch(
@@ -38,25 +37,19 @@ export default function FeedPage({setUserData}) {
   return (
     <>
       <MainHeader />
-      <div className={styles.main}>
-        <main>
+      <main className={styles.main}>
           {data.map((user) => (
             <InstagramPost
               key={user.id}
               profileImage={user.user.profile_image.small}
-              // bigPhoto={user.user.profile_image.regular}
               username={user.user.username}
-              // name={user.user.name}
-              // totalphotos={user.user.total_photos}
-              // bio={user.user.bio}
               location={user.user.location}
               image={user.urls.regular}
               likes={user.likes}
               setUserData={setUserData}
             />
           ))}
-        </main>
-      </div>
+      </main>
     </>
   );
 }

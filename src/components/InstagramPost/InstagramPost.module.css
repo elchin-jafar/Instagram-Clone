@@ -1,4 +1,4 @@
-/* .postHeader {
+.postHeader {
     display: flex;
     align-items: center;
 }
@@ -8,12 +8,12 @@
     flex-direction: column;
 }
 
-.username {
+/* .username {
     font-size: 14px;
     font-weight: bold;
-}
+} */
 
-.userLink {
+/* .userLink {
     text-decoration: none;
     color: initial;
 }

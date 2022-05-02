@@ -6,12 +6,14 @@ import { useState } from "react";
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [trueLogin, setTruelogin] = useState(false);
+  const [correctLogin, setCorrectLogin] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   async function handleFormSubmit(event) {
     event.preventDefault();
+    setLoading(true);
     const response = await fetch("https://dummyjson.com/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -22,8 +24,9 @@ export default function LoginPage() {
       }),
     });
     const json = await response.json();
+    setLoading(false);
     if (json.message) {
-      setTruelogin(true);
+      setCorrectLogin(true);
       setError(json.message);
       return json.message;
     } else {
@@ -35,7 +38,7 @@ export default function LoginPage() {
     <div className={styles.page}>
       <div className={styles.container}>
         <img className={styles.img} src={img} alt="logo" />
-        {trueLogin && <div style={{ color: "red" }}>{error}</div>}
+        {correctLogin && <div style={{ color: "red" }}>{error}</div>}
         <form action="" className={styles.form} onSubmit={handleFormSubmit}>
           <input
             className={styles.input}
@@ -51,7 +54,7 @@ export default function LoginPage() {
             type="password"
             placeholder="Password"
           />
-          <button className={styles.button}>Log in</button>
+          {loading ? <button className={styles.loadingButton}>Loading..</button>  :<button className={styles.button}>Log in</button>}
         </form>
         <div className={styles.separator}>
           <span>OR</span>

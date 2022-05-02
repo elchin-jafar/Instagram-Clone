@@ -178,7 +178,7 @@ export default function ProfilePage({userData}) {
     <div className="bg-gray-100 h-auto px-48">
       <div className="flex md:flex-row-reverse flex-wrap">
         <div className="w-full md:w-3/4 p-4 text-center">
-          <div className="text-left pl-4 pt-3">
+          <div className={`${styles.onOneLine} text-left pl-4 pt-3`}>
             <span className="text-base text-gray-700 text-2xl mr-2">{userData[0].user.first_name}</span>
             <span className="text-base font-semibold text-gray-700 mr-2">
               <button
@@ -208,7 +208,7 @@ export default function ProfilePage({userData}) {
             </span>
           </div>
 
-          <div className="text-left pl-4 pt-3">
+          <div className={`text-left pl-4 pt-3`}>
             <span className="text-base font-semibold text-gray-700 mr-2">
               <b>{userData[0].user.total_photos}</b> posts
             </span>
@@ -243,7 +243,7 @@ export default function ProfilePage({userData}) {
               aria-haspopup="true"
             >
               <img
-                className="h-40 w-40 rounded-full"
+                className={`${styles.profilePhoto} h-40 w-40 rounded-full`}
                 src={userData[0].user.profile_image.large}
                 alt=""
               />

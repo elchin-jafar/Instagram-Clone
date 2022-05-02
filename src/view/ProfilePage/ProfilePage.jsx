@@ -1,7 +1,12 @@
 import "./ProfilePage.css";
 import styles from "./ProfilePage.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage({ userData }) {
+  const navigate = useNavigate();
+  function handleClick() {
+    navigate("/feed");
+  }
   return (
     <>
       <div className="insta-clone">
@@ -96,6 +101,7 @@ export default function ProfilePage({ userData }) {
                   aria-label="Notifications"
                 >
                   <svg
+                    onClick={handleClick}
                     className="h-6 w-6"
                     fill="none"
                     strokeLinecap="round"

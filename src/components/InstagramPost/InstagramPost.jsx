@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./InstagramPost.module.css";
+import _ from "lodash";
 
 export default function InstagramPost({
   profileImage,
@@ -12,6 +13,7 @@ export default function InstagramPost({
 }) {
   const [like, setLike] = useState(false);
   const navigate = useNavigate();
+
   async function handleClick() {
     const response = await fetch(
       `https://api.unsplash.com/users/${username}/photos/?per_page=12&client_id=ZRYIbgpUWEVo4o_1apdz5wxs4ujLhd18wIy8N1kXMa8`
@@ -20,6 +22,7 @@ export default function InstagramPost({
     setUserData(parsed);
     navigate("/profile");
   }
+
   return (
     <div
       style={{
@@ -37,12 +40,10 @@ export default function InstagramPost({
           />
           <div className={`${styles.userInfo} ml-3`}>
             <span
-              className={`${styles.username}text-sm font-semibold antialiased block leading-tight`}
+              onClick={handleClick}
+              className={`${styles.username} text-sm font-semibold antialiased block leading-tight`}
             >
-              <Link to="/profile" className={styles.userLink}>
-                {" "}
-                {username.toLowerCase()}{" "}
-              </Link>
+              {username}
             </span>
             <span className={`${styles.location} text-gray-600 text-xs block`}>
               {location}

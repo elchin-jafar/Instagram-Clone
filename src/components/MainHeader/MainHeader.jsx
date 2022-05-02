@@ -1,5 +1,5 @@
-import img from "../../assets/context.png"
-import styles from "./MainHeader.module.css"
+import img from "../../assets/context.png";
+import styles from "./MainHeader.module.css";
 export default function MainHeader() {
   return (
     <>

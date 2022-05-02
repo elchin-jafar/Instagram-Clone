@@ -5,7 +5,7 @@ import styles from "./FeedPage.module.css";
 
 import _ from "lodash";
 
-export default function FeedPage({setUserData}) {
+export default function FeedPage({ setUserData }) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
 
@@ -38,17 +38,17 @@ export default function FeedPage({setUserData}) {
     <>
       <MainHeader />
       <main className={styles.main}>
-          {data.map((user) => (
-            <InstagramPost
-              key={user.id}
-              profileImage={user.user.profile_image.small}
-              username={user.user.username}
-              location={user.user.location}
-              image={user.urls.regular}
-              likes={user.likes}
-              setUserData={setUserData}
-            />
-          ))}
+        {data.map((user) => (
+          <InstagramPost
+            key={user.id}
+            profileImage={user.user.profile_image.small}
+            username={user.user.username}
+            location={user.user.location}
+            image={user.urls.regular}
+            likes={user.likes}
+            setUserData={setUserData}
+          />
+        ))}
       </main>
     </>
   );

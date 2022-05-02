@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-.gridPhotoWrapper{
+.gridPhotoWrapper {
     aspect-ratio: 1;
     overflow: hidden;
 }

@@ -13,14 +13,17 @@ export default function App() {
     background-color:rgb(250, 250, 250);
     `;
 
-    const [userData,setUserData] = useState([]);
-    console.log(userData);
+  const [userData, setUserData] = useState([]);
+  console.log(userData);
   return (
     <>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/feed" element={<FeedPage userData = {userData} setUserData={setUserData} />} />
+        <Route
+          path="/feed"
+          element={<FeedPage userData={userData} setUserData={setUserData} />}
+        />
         <Route path="/profile" element={<ProfilePage userData={userData} />} />
       </Routes>
     </>

@@ -54,7 +54,11 @@ export default function LoginPage() {
             type="password"
             placeholder="Password"
           />
-          {loading ? <button className={styles.loadingButton}>Loading..</button>  :<button className={styles.button}>Log in</button>}
+          {loading ? (
+            <button className={styles.loadingButton}>Loading..</button>
+          ) : (
+            <button className={styles.button}>Log in</button>
+          )}
         </form>
         <div className={styles.separator}>
           <span>OR</span>
